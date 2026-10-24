@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Republic of the Philippines · Access Restricted</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #f0f2f5;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    /* Main card */
+    .card {
+      background: white;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+      overflow: hidden;
+      text-align: center;
+    }
+
+    /* Header with Philippine flag accent */
+    .header {
+      background: #0038A8; /* Philippine blue */
+      color: white;
+      padding: 18px 20px;
+      font-size: 17px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-bottom: 3px solid #CE1126; /* Philippine red */
+      letter-spacing: 0.3px;
+    }
+
+    .header-logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: #FCD116; /* Philippine yellow */
+      border-radius: 50%;
+      color: #0038A8;
+      font-size: 20px;
+      font-weight: 700;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    .header span {
+      font-size: 18px;
+      line-height: 1.2;
+      text-align: left;
+    }
+
+    .header small {
+      display: block;
+      font-size: 12px;
+      font-weight: 400;
+      opacity: 0.9;
+      margin-top: 2px;
+      letter-spacing: 0.5px;
+    }
+
+    .content {
+      padding: 28px 24px 32px;
+    }
+
+    .icon {
+      width: 70px;
+      height: 70px;
+      background: #ffebee;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 32px;
+    }
+
+    .message {
+      font-size: 16px;
+      color: #1e2b3c;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    .message strong {
+      color: #0038A8;
+      font-weight: 600;
+    }
+
+    .buy-btn {
+      background: #25D366;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 16px 24px;
+      font-size: 17px;
+      font-weight: 600;
+      width: 100%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+
+    .buy-btn:active {
+      background: #1da851;
+    }
+
+    .price {
+      background: rgba(255,255,255,0.25);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    /* Overlay + Popup */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 20px;
+    }
+
+    .overlay.show {
+      display: flex;
+    }
+
+    .popup {
+      background: white;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 340px;
+      padding: 28px 24px;
+      text-align: center;
+      animation: popIn 0.25s ease;
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+
+    .popup-icon {
+      font-size: 42px;
+      margin-bottom: 14px;
+    }
+
+    .popup h3 {
+      font-size: 18px;
+      margin-bottom: 12px;
+      color: #1e2b3c;
+    }
+
+    .popup p {
+      font-size: 15px;
+      color: #555;
+      line-height: 1.5;
+      margin-bottom: 22px;
+    }
+
+    .whatsapp-btn {
+      background: #25D366;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 14px 20px;
+      font-size: 16px;
+      font-weight: 600;
+      width: 100%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .whatsapp-btn:active {
+      background: #1da851;
+    }
+
+    .close-btn {
+      margin-top: 14px;
+      background: none;
+      border: none;
+      color: #888;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .ph-flag-bar {
+      display: flex;
+      height: 4px;
+      width: 100%;
+    }
+
+    .ph-flag-bar .blue { background: #0038A8; flex: 1; }
+    .ph-flag-bar .red { background: #CE1126; flex: 1; }
+    .ph-flag-bar .yellow { background: #FCD116; flex: 0.3; }
+
+    .footer-note {
+      font-size: 12px;
+      color: #999;
+      margin-top: 18px;
+      letter-spacing: 0.3px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <!-- Header with flag accent + logo -->
+    <div class="header">
+      <div class="header-logo">★</div>
+      <span>
+        REPUBLIC OF THE PHILIPPINES
+        <small>Government Benefits Portal</small>
+      </span>
+    </div>
+    <div class="ph-flag-bar">
+      <div class="blue"></div>
+      <div class="red"></div>
+      <div class="yellow"></div>
+    </div>
+
+    <div class="content">
+      <div class="icon">🔒</div>
+      <div class="message">
+        <strong>Access Restricted</strong><br>
+        You cannot access or communicate with this organization until you have the registered form for government benefits.
+      </div>
+      <button class="buy-btn" onclick="showPopup()">
+        Buy Form
+        <span class="price">₱2,000</span>
+      </button>
+      <div class="footer-note">Official transaction · Secure via WhatsApp</div>
+    </div>
+  </div>
+
+  <!-- Popup -->
+  <div class="overlay" id="overlay">
+    <div class="popup">
+      <div class="popup-icon">💬</div>
+      <h3>Purchase Required</h3>
+      <p>
+        You need to buy the registered form through our support account.<br><br>
+        Please chat with our representative on WhatsApp to complete the purchase and access government benefits.
+      </p>
+      <button class="whatsapp-btn" onclick="openWhatsApp()">
+        Chat on WhatsApp
+      </button>
+      <button class="close-btn" onclick="hidePopup()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    // Republic of the Philippines – benefit access form
+    function showPopup() {
+      document.getElementById('overlay').classList.add('show');
+    }
+
+    function hidePopup() {
+      document.getElementById('overlay').classList.remove('show');
+    }
+
+    function openWhatsApp() {
+      // Replace with the real WhatsApp number (with country code, no + or spaces)
+      // Example: 639171234567 for a Philippine number
+      const phone = "639171234567";  
+      const message = encodeURIComponent("Hello, I want to buy the registered form (₱2,000) for government benefits. Please assist me.");
+      window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
+    }
+
+    // Close popup when clicking outside
+    document.getElementById('overlay').addEventListener('click', function(e) {
+      if (e.target === this) hidePopup();
+    });
+  </script>
+
+</body>
+</html>
